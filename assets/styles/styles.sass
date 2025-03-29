@@ -1,0 +1,725 @@
+@use "sass:color"
+
+$primary: #8A2BE2 // Фиолетовый (BlueViolet)
+$primary-light: #9D50BB
+$primary-dark: #6A0DAD
+$secondary: #4B0082 // Индиго
+$accent: #DA70D6 // Орхидея
+$black: #121212
+$gray-dark: #212121
+$gray: #424242
+$gray-light: #616161
+$white: #F5F5F5
+$success: #4CAF50
+$warning: #FFC107
+$error: #F44336
+$info: #2196F3
+
+$primary-r: 138
+$primary-g: 43
+$primary-b: 226
+$secondary-r: 75
+$secondary-g: 0
+$secondary-b: 130
+$black-r: 18
+$black-g: 18
+$black-b: 18
+$gray-r: 66
+$gray-g: 66
+$gray-b: 66
+
+\:root
+  --primary: #{$primary}
+  --primary-light: #{$primary-light}
+  --primary-dark: #{$primary-dark}
+  --primary-rgb: #{$primary-r}, #{$primary-g}, #{$primary-b}
+  --secondary: #{$secondary}
+  --secondary-rgb: #{$secondary-r}, #{$secondary-g}, #{$secondary-b}
+  --accent: #{$accent}
+  --black: #{$black}
+  --black-rgb: #{$black-r}, #{$black-g}, #{$black-b}
+  --gray-dark: #{$gray-dark}
+  --gray: #{$gray}
+  --gray-light: #{$gray-light}
+  --white: #{$white}
+  --success: #{$success}
+  --warning: #{$warning}
+  --error: #{$error}
+  --info: #{$info}
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html, body
+  height: 100%
+  font-family: 'Inter', 'Roboto', Arial, sans-serif
+  font-size: 16px
+  line-height: 1.6
+  color: $white
+  background-color: $black
+  scroll-behavior: smooth
+
+// Типография
+h1, h2, h3, h4, h5, h6
+  font-weight: 700
+  color: $white
+  margin-bottom: 1rem
+
+h1
+  font-size: 2.5rem
+  line-height: 1.2
+
+h2
+  font-size: 2rem
+  line-height: 1.3
+
+h3
+  font-size: 1.75rem
+  line-height: 1.4
+
+p
+  margin-bottom: 1rem
+
+a
+  color: $primary
+  text-decoration: none
+  transition: color 0.3s ease
+
+  &:hover
+    color: $primary-light
+    text-decoration: underline
+
+  &:active
+    color: $primary-dark
+
+// Контейнеры
+.container
+  width: 100%
+  max-width: 1200px
+  padding: 0 1rem
+  margin: 0 auto
+
+.section
+  padding: 4rem 0
+
+// Кнопки
+.btn
+  display: inline-block
+  padding: 0.75rem 1.5rem
+  border-radius: 4px
+  font-weight: 600
+  text-align: center
+  cursor: pointer
+  transition: all 0.3s ease
+  border: none
+  font-size: 1rem
+  position: relative
+  overflow: hidden
+
+  &::after
+    content: ''
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 5px
+    height: 5px
+    background: rgba(255, 255, 255, 0.5)
+    opacity: 0
+    border-radius: 100%
+    transform: scale(1, 1) translate(-50%)
+    transform-origin: 50% 50%
+
+  &:active:after
+    animation: ripple 0.6s ease-out
+
+  @keyframes ripple
+    0%
+      transform: scale(0, 0)
+      opacity: 0.5
+    100%
+      transform: scale(50, 50)
+      opacity: 0
+
+  &-primary
+    background-color: $primary
+    color: $white
+
+    &:hover
+      background-color: $primary-light
+      box-shadow: 0 4px 10px rgba($primary-r, $primary-g, $primary-b, 0.3)
+
+    &:active
+      background-color: $primary-dark
+
+  &-secondary
+    background-color: $secondary
+    color: $white
+
+    &:hover
+      // Заменено lighten() на color.adjust()
+      background-color: color.adjust($secondary, $lightness: 10%)
+      box-shadow: 0 4px 10px rgba($secondary-r, $secondary-g, $secondary-b, 0.3)
+
+    &:active
+      // Заменено darken() на color.adjust()
+      background-color: color.adjust($secondary, $lightness: -10%)
+
+  &-outline
+    background-color: transparent
+    border: 2px solid $primary
+    color: $primary
+
+    &:hover
+      background-color: rgba($primary-r, $primary-g, $primary-b, 0.1)
+      box-shadow: 0 4px 10px rgba($primary-r, $primary-g, $primary-b, 0.2)
+
+    &:active
+      background-color: rgba($primary-r, $primary-g, $primary-b, 0.2)
+
+  &-text
+    background-color: transparent
+    color: $primary
+    padding: 0.5rem 1rem
+
+    &:hover
+      background-color: rgba($primary-r, $primary-g, $primary-b, 0.1)
+
+    &:active
+      background-color: rgba($primary-r, $primary-g, $primary-b, 0.2)
+
+// Карточки
+.card
+  background-color: $gray-dark
+  border-radius: 8px
+  overflow: hidden
+  box-shadow: 0 4px 20px rgba($black-r, $black-g, $black-b, 0.3)
+  transition: transform 0.3s ease, box-shadow 0.3s ease
+
+  &:hover
+    box-shadow: 0 8px 30px rgba($black-r, $black-g, $black-b, 0.4)
+
+  &__header
+    padding: 1.5rem
+    border-bottom: 1px solid $gray
+
+  &__body
+    padding: 1.5rem
+
+  &__footer
+    padding: 1.5rem
+    border-top: 1px solid $gray
+
+// Формы
+.form-group
+  margin-bottom: 1.5rem
+
+  label
+    display: block
+    margin-bottom: 0.5rem
+    font-weight: 600
+
+  input, textarea, select
+    width: 100%
+    padding: 0.75rem 1rem
+    border-radius: 4px
+    background-color: $gray-dark
+    border: 1px solid $gray
+    color: $white
+    font-size: 1rem
+    transition: border-color 0.3s ease, box-shadow 0.3s ease
+
+    &:focus
+      outline: none
+      border-color: $primary
+      box-shadow: 0 0 0 3px rgba($primary-r, $primary-g, $primary-b, 0.3)
+
+    &::placeholder
+      color: $gray-light
+
+  textarea
+    min-height: 120px
+    resize: vertical
+
+// Navbar
+.navbar
+  position: sticky
+  top: 0
+  background-color: rgba($black-r, $black-g, $black-b, 0.95)
+  backdrop-filter: blur(10px)
+  z-index: 1000
+  padding: 1rem 0
+  box-shadow: 0 2px 10px rgba($black-r, $black-g, $black-b, 0.3)
+
+  &__container
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &__logo
+    font-size: 1.5rem
+    font-weight: 700
+    color: $white
+
+    span
+      color: $primary
+
+  &__menu
+    display: flex
+    list-style: none
+
+    &-item
+      margin-left: 1.5rem
+
+      a
+        color: $white
+        padding: 0.5rem
+        position: relative
+
+        &::after
+          content: ''
+          position: absolute
+          width: 0
+          height: 2px
+          bottom: -2px
+          left: 0
+          background-color: $primary
+          transition: width 0.3s ease
+
+        &:hover
+          color: $primary-light
+          text-decoration: none
+
+          &::after
+            width: 100%
+
+        &.active
+          color: $primary
+
+          &::after
+            width: 100%
+
+// Hero секция
+.hero
+  min-height: 80vh
+  display: flex
+  align-items: center
+  position: relative
+  overflow: hidden
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: linear-gradient(135deg, rgba($black-r, $black-g, $black-b, 0.9), rgba($secondary-r, $secondary-g, $secondary-b, 0.8))
+    z-index: -1
+
+  &__content
+    max-width: 600px
+
+    h1
+      font-size: 3.5rem
+      margin-bottom: 1.5rem
+
+      span
+        color: $primary
+
+    p
+      font-size: 1.2rem
+      margin-bottom: 2rem
+      color: rgba($white, 0.9)
+
+    .btn
+      margin-right: 1rem
+      margin-bottom: 1rem
+
+// Градиенты и эффекты
+.gradient-text
+  background: linear-gradient(to right, $primary, $accent)
+  -webkit-background-clip: text
+  background-clip: text
+  color: transparent
+
+.glow
+  box-shadow: 0 0 15px rgba($primary-r, $primary-g, $primary-b, 0.5)
+
+// Анимации
+@keyframes fadeIn
+  from
+    opacity: 0
+    transform: translateY(20px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+.fade-in
+  animation: fadeIn 0.5s ease forwards
+
+// Стили чекбоксов
+.custom-checkbox
+  position: relative
+
+  input[type="checkbox"]
+    position: absolute
+    opacity: 0
+    cursor: pointer
+    height: 0
+    width: 0
+
+  label
+    position: relative
+    padding-left: 2rem
+    cursor: pointer
+    user-select: none
+    display: inline-block
+    line-height: 20px
+    transition: color 0.3s ease
+
+    &:hover
+      color: $primary-light
+
+    &::before
+      content: ''
+      position: absolute
+      left: 0
+      top: 0
+      width: 18px
+      height: 18px
+      border: 2px solid $gray
+      border-radius: 4px
+      background-color: $gray-dark
+      transition: all 0.2s ease
+
+  input[type="checkbox"]:checked + label
+    color: $primary
+
+    &::before
+      background-color: $primary
+      border-color: $primary
+
+    &::after
+      content: ''
+      position: absolute
+      left: 6px
+      top: 3px
+      width: 6px
+      height: 10px
+      border: solid $white
+      border-width: 0 2px 2px 0
+      transform: rotate(45deg)
+
+  input[type="checkbox"]:focus + label::before
+    box-shadow: 0 0 0 3px rgba($primary-r, $primary-g, $primary-b, 0.3)
+
+// Выпадающие элементы
+.collapsible
+  &-header
+    cursor: pointer
+    display: flex
+    justify-content: space-between
+    align-items: center
+    transition: background-color 0.3s ease
+
+    &:hover
+      background-color: rgba($primary-r, $primary-g, $primary-b, 0.1)
+
+  &-content
+    overflow: hidden
+    transition: max-height 0.3s ease
+
+  &-icon
+    margin-left: 0.75rem
+    transition: transform 0.3s ease
+    color: $primary
+
+    &.rotated
+      transform: rotate(180deg)
+
+// Бейджи и индикаторы
+.badge
+  display: inline-block
+  padding: 0.25rem 0.5rem
+  border-radius: 4px
+  font-size: 0.8rem
+  font-weight: 600
+
+  &-primary
+    background-color: $primary
+    color: $white
+    box-shadow: 0 2px 5px rgba($primary-r, $primary-g, $primary-b, 0.3)
+
+  &-success
+    background-color: $success
+    color: $white
+
+  &-warning
+    background-color: $warning
+    color: $black
+
+  &-error
+    background-color: $error
+    color: $white
+
+  &-info
+    background-color: $info
+    color: $white
+
+// Таблицы
+.data-table
+  width: 100%
+  border-collapse: collapse
+
+  th, td
+    padding: 0.75rem 1rem
+    text-align: left
+    border-bottom: 1px solid $gray
+
+  th
+    font-weight: 600
+    color: $white
+    background-color: rgba($gray-dark, 0.5)
+
+  tr
+    transition: background-color 0.2s ease
+
+    &:hover
+      background-color: rgba($gray-r, $gray-g, $gray-b, 0.1)
+
+    &:last-child td
+      border-bottom: none
+
+// Состояния загрузки
+.loading
+  &-state
+    text-align: center
+    padding: 2rem
+    background-color: $gray-dark
+    border-radius: 8px
+    margin-bottom: 2rem
+    box-shadow: 0 4px 20px rgba($black-r, $black-g, $black-b, 0.3)
+
+    p
+      font-size: 1.1rem
+      opacity: 0.9
+
+  &-spinner
+    display: inline-block
+    width: 40px
+    height: 40px
+    border: 4px solid rgba($primary-r, $primary-g, $primary-b, 0.3)
+    border-radius: 50%
+    border-top-color: $primary
+    animation: spin 1s ease-in-out infinite
+    margin-bottom: 1rem
+
+    @keyframes spin
+      to
+        transform: rotate(360deg)
+
+// Состояния ошибок
+.error-state
+  text-align: center
+  padding: 2rem
+  background-color: $gray-dark
+  border-radius: 8px
+  margin-bottom: 2rem
+  box-shadow: 0 4px 20px rgba($black-r, $black-g, $black-b, 0.3)
+  border-left: 4px solid $error
+
+  p
+    font-size: 1.1rem
+    color: rgba($white, 0.9)
+
+// Фильтры
+.filters
+  &-grid
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+    gap: 1.5rem
+
+  &-actions
+    margin-top: 1.5rem
+    display: flex
+    justify-content: flex-end
+
+  .date-range
+    display: flex
+    gap: 0.5rem
+
+    input
+      flex: 1
+
+// Категории
+.categories
+  display: flex
+  flex-wrap: wrap
+  gap: 0.75rem
+
+// Статусы
+.status-badge
+  display: inline-block
+  padding: 0.25rem 0.5rem
+  border-radius: 4px
+  font-size: 0.875rem
+  transition: all 0.3s ease
+  box-shadow: 0 2px 5px rgba($black-r, $black-g, $black-b, 0.2)
+
+  &.active
+    background-color: $success
+    color: $white
+
+  &.limited
+    background-color: $warning
+    color: $black
+
+  &.inactive
+    background-color: $gray
+    color: $white
+
+// Адаптивные свойства элементов формы
+.form-control
+  background-color: $gray-dark
+  border: 1px solid $gray
+  color: $white
+  border-radius: 4px
+  padding: 0.75rem 1rem
+  width: 100%
+  font-size: 1rem
+  transition: all 0.3s ease
+
+  &:focus
+    border-color: $primary
+    box-shadow: 0 0 0 3px rgba($primary-r, $primary-g, $primary-b, 0.3)
+    outline: none
+
+  &::placeholder
+    color: $gray-light
+
+  &:disabled
+    opacity: 0.7
+    cursor: not-allowed
+
+// Утилиты
+.text-primary
+  color: $primary
+.text-secondary
+  color: $secondary
+.text-accent
+  color: $accent
+.text-white
+  color: $white
+.text-gray
+  color: $gray-light
+.text-success
+  color: $success
+.text-warning
+  color: $warning
+.text-error
+  color: $error
+
+.bg-primary
+  background-color: $primary
+.bg-secondary
+  background-color: $secondary
+.bg-black
+  background-color: $black
+.bg-gray-dark
+  background-color: $gray-dark
+
+.mt-1
+  margin-top: 0.5rem
+.mt-2
+  margin-top: 1rem
+.mt-3
+  margin-top: 1.5rem
+.mt-4
+  margin-top: 2rem
+.mt-5
+  margin-top: 3rem
+
+.mb-1
+  margin-bottom: 0.5rem
+.mb-2
+  margin-bottom: 1rem
+.mb-3
+  margin-bottom: 1.5rem
+.mb-4
+  margin-bottom: 2rem
+.mb-5
+  margin-bottom: 3rem
+
+.py-1
+  padding-top: 0.5rem
+  padding-bottom: 0.5rem
+.py-2
+  padding-top: 1rem
+  padding-bottom: 1rem
+.py-3
+  padding-top: 1.5rem
+  padding-bottom: 1.5rem
+.py-4
+  padding-top: 2rem
+  padding-bottom: 2rem
+.py-5
+  padding-top: 3rem
+  padding-bottom: 3rem
+
+.px-1
+  padding-left: 0.5rem
+  padding-right: 0.5rem
+.px-2
+  padding-left: 1rem
+  padding-right: 1rem
+.px-3
+  padding-left: 1.5rem
+  padding-right: 1.5rem
+.px-4
+  padding-left: 2rem
+  padding-right: 2rem
+.px-5
+  padding-left: 3rem
+  padding-right: 3rem
+
+// Медиа запросы для адаптивности
+@media (max-width: 992px)
+  html
+    font-size: 15px
+
+  .hero__content h1
+    font-size: 3rem
+
+  .filters-grid
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+
+@media (max-width: 768px)
+  html
+    font-size: 14px
+
+  .hero__content h1
+    font-size: 2.5rem
+
+  .navbar__menu
+    display: none
+
+  .card:hover
+    transform: none
+
+  .filters-grid
+    grid-template-columns: 1fr
+
+@media (max-width: 576px)
+  html
+    font-size: 13px
+
+  .hero__content h1
+    font-size: 2rem
+
+  .section
+    padding: 3rem 0
+
+  .date-range
+    flex-direction: column
+    gap: 0.75rem

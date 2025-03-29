@@ -1,0 +1,13 @@
+[
+  {
+    "name": "David",
+    "surname": "Jones",
+    "credentials": {
+      "username": "david.jones@creds.com",
+      "passphrase": "52ccca432ab28afd90969084c061b23c"
+    },
+    "active": true,
+    "created": "03.03.2025 10:00:21",
+    "_comment": "Пользователь David Jones с логином david.jones@creds.com и паролем '8u3&s-1uda'"
+  }
+]
