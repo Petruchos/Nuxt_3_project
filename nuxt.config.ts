@@ -33,10 +33,10 @@ export default defineNuxtConfig({
 
     compatibilityDate: '2025-03-28',
 
-    // devServer: {
-    //     host: '192.168.0.83',
-    //     port: 3000,
-    // },
+    devServer: {
+        host: '192.168.0.83',
+        port: 3000,
+    },
     vite: {
         server: {
             fs: {

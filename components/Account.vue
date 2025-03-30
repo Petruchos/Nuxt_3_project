@@ -4,7 +4,7 @@
       <header class="navbar">
         <div class="container navbar__container">
           <div class="navbar__logo">
-            <span>Админ</span>Панель
+            <span>Админ</span> Панель
           </div>
           <div v-if="authStore.getUser">
             <span class="user-info">
@@ -334,14 +334,7 @@ th {
   flex: 1;
 }
 
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
 .filter-actions {
-  margin-top: 1.5rem;
   display: flex;
   justify-content: flex-end;
 }
@@ -386,6 +379,7 @@ th {
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.3s ease;
+  padding-bottom: 0;
 }
 
 .collapsible-header:hover {
