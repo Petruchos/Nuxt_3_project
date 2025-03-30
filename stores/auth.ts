@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import usersData from '~/users.json';
+import md5 from 'crypto-js/md5';
 
 interface User {
     name: string;
@@ -15,12 +16,8 @@ interface AuthState {
 
 const isBrowser = () => typeof window !== 'undefined';
 
-function extractPasswordFromComment(comment: string): string {
-    const match = comment.match(/'([^']+)'/);
-    if (match && match[1]) {
-        return match[1];
-    }
-    return '';
+function hashPassword(password: string): string {
+    return md5(password).toString();
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -49,10 +46,11 @@ export const useAuthStore = defineStore('auth', {
                     u => u.credentials.username === username
                 );
 
-                if (user && user._comment) {
-                    const actualPassword = extractPasswordFromComment(user._comment);
+                if (user) {
+                    const hashedPassword = hashPassword(password);
+                    console.log('Сгенерированный хеш:', hashedPassword);
 
-                    if (password === actualPassword) {
+                    if (hashedPassword === user.credentials.passphrase) {
                         const userData: User = {
                             name: user.name,
                             surname: user.surname,
@@ -72,6 +70,7 @@ export const useAuthStore = defineStore('auth', {
                 this.error = 'Введены неверные данные авторизации. Попробуйте еще раз.';
                 return false;
             } catch (error) {
+                console.error('Ошибка авторизации:', error);
                 this.error = 'Произошла ошибка при входе. Попробуйте позже.';
                 return false;
             } finally {
@@ -101,4 +100,3 @@ export const useAuthStore = defineStore('auth', {
         }
     }
 });
-

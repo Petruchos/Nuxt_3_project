@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     modules: [
         '@pinia/nuxt',
         '@nuxt/ui',
-        'nuxt-icon'
+        'nuxt-icon',
     ],
 
     compatibilityDate: '2025-03-28',
