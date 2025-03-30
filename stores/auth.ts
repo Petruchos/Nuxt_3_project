@@ -48,7 +48,6 @@ export const useAuthStore = defineStore('auth', {
 
                 if (user) {
                     const hashedPassword = hashPassword(password);
-                    console.log('Сгенерированный хеш:', hashedPassword);
 
                     if (hashedPassword === user.credentials.passphrase) {
                         const userData: User = {

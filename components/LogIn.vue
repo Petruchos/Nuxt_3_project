@@ -63,7 +63,7 @@ import { useAuthStore } from '~/stores/auth';
 
 let username = '';
 let password = '';
-let showPassword = false;
+let showPassword = ref(false);
 const router = useRouter();
 const authStore = useAuthStore();
 
@@ -77,7 +77,7 @@ onMounted(() => {
 });
 
 function togglePasswordVisibility() {
-  showPassword = !showPassword;
+  showPassword.value = !showPassword.value;
 }
 
 async function login() {
